@@ -1,0 +1,52 @@
+{
+    "name": "deepslam/laravelcrud",
+    "type": "library",
+    "description": "Laravel Crus is the simple solution for fast creating professional admin panels with Laravel 5.3+",
+    "keywords": [
+        "deepslam",
+        "laravelcrud",
+        "laravel",
+        "crud"
+    ],
+    "homepage": "https://github.com/deepslam/laravelcrud",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Ivanov",
+            "email": "me@ivanovdmitry.com",
+            "homepage": "http://www.ivanovsmitry.com",
+            "role": "Main developer"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~5.1",
+        "almasaeed2010/AdminLTE" : "2.3.*",
+        "laravel/framework": "5.3.*|5.4.*",
+        "prologue/alerts": "^0.4.1",
+        "jenssegers/date": "^3.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*",
+        "scrutinizer/ocular": "~1.1",
+        "squizlabs/php_codesniffer": "~2.3",
+        "laracasts/generators": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Deepslam\\LaravelCrud\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Deepslam\\LaravelCrud\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
