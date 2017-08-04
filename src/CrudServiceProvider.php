@@ -20,7 +20,7 @@ class CrudServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public $routeFilePath = '/routes/crud/routes.php';
+    public $routeFilePath = '/routes/routes.php';
 
     /**
      * Perform post-registration booting of services.
@@ -39,7 +39,7 @@ class CrudServiceProvider extends ServiceProvider
 
         // use the vendor configuration file as fallback
         $this->mergeConfigFrom(
-            __DIR__.'/config/deepslam/crud.php', 'deepslam.crud'
+            __DIR__.'/config/crud.php', 'deepslam.crud'
         );
 
         $this->registerAdminMiddleware($this->app->router);
@@ -80,9 +80,10 @@ class CrudServiceProvider extends ServiceProvider
         });
 
         // register its dependencies
+        /*
         $this->app->register(\Jenssegers\Date\DateServiceProvider::class);
         $this->app->register(\Prologue\Alerts\AlertsServiceProvider::class);
-
+         */
         // register their aliases
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Alert', \Prologue\Alerts\Facades\Alert::class);
@@ -103,11 +104,11 @@ class CrudServiceProvider extends ServiceProvider
     {
         // in Laravel 5.4
         if (method_exists($router, 'aliasMiddleware')) {
-            Route::aliasMiddleware('admin', \Backpack\Base\app\Http\Middleware\Admin::class);
+            Route::aliasMiddleware('admin', \Deepslam\LaravelCrud\app\Http\Middleware\Admin::class);
         }
         // in Laravel 5.3 and below
         else {
-            Route::middleware('admin', \Backpack\Base\app\Http\Middleware\Admin::class);
+            Route::middleware('admin', \Deepslam\LaravelCrud\app\Http\Middleware\Admin::class);
         }
     }
 
@@ -117,16 +118,16 @@ class CrudServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/config' => config_path()], 'config');
 
         // publish lang files
-        // $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
+        // $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/deepslam')], 'lang');
 
         // publish views
-        $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/backpack/base')], 'views');
+        $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/deepslam/crud')], 'views');
 
         // publish error views
         $this->publishes([__DIR__.'/resources/error_views' => resource_path('views/errors')], 'errors');
 
         // publish public Backpack assets
-        $this->publishes([__DIR__.'/public' => public_path('vendor/backpack')], 'public');
+        $this->publishes([__DIR__.'/public' => public_path('vendor/deepslam')], 'public');
 
         // publish public AdminLTE assets
         $this->publishes([base_path('vendor/almasaeed2010/adminlte') => public_path('vendor/adminlte')], 'adminlte');
