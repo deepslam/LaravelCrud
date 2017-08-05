@@ -56,10 +56,7 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function setupRoutes(Router $router)
     {
-        // by default, use the routes file provided in vendor
         $routeFilePathInUse = __DIR__.$this->routeFilePath;
-
-        // but if there's a file with the same name in routes/backpack, use that one
         if (file_exists(base_path().$this->routeFilePath)) {
             $routeFilePathInUse = base_path().$this->routeFilePath;
         }
@@ -86,9 +83,10 @@ class CrudServiceProvider extends ServiceProvider
          */
         // register their aliases
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        /*
         $loader->alias('Alert', \Prologue\Alerts\Facades\Alert::class);
         $loader->alias('Date', \Jenssegers\Date\Date::class);
-
+         */
         // register the services that are only used for development
         if ($this->app->environment() == 'local') {
             if (class_exists('Laracasts\Generators\GeneratorsServiceProvider')) {
@@ -118,16 +116,10 @@ class CrudServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/config' => config_path()], 'config');
 
         // publish lang files
-        // $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/deepslam')], 'lang');
+        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/deepslam')], 'lang');
 
         // publish views
-        $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/deepslam/crud')], 'views');
-
-        // publish error views
-        $this->publishes([__DIR__.'/resources/error_views' => resource_path('views/errors')], 'errors');
-
-        // publish public Backpack assets
-        $this->publishes([__DIR__.'/public' => public_path('vendor/deepslam')], 'public');
+        $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/deepslam')], 'views');
 
         // publish public AdminLTE assets
         $this->publishes([base_path('vendor/almasaeed2010/adminlte') => public_path('vendor/adminlte')], 'adminlte');
